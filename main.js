@@ -244,7 +244,7 @@ function showError(msg, descr) {
 }
 
 $(document).ready(() => {
-  getUsers()
+  User.getUsers()
     .then(({ users, usersCount }) => {
       const pagesCount = Math.ceil(usersCount / users.length);
       setPagination(pagesCount, 1);
@@ -252,21 +252,6 @@ $(document).ready(() => {
       setUsersControls(users || []);
     });
 });
-
-function getUsers() {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: 'ajax.php',
-      method: "GET",
-      success: (result) => {
-        resolve(result);
-      },
-      error: (xhr, resp, text) => {
-        reject(text);
-      }
-    });
-  });
-}
 
 function removeUsers(usersIds) {
   $.ajax({
