@@ -150,6 +150,11 @@ function setUsersControls(users) {
     currentGroupOperation =  $(this).val();
   });
   $('.multi-ops-btn').click(e => {
+    if (checkedUserIds.length === 0) {
+      showError("Please select at least one user!");
+      return;
+    }
+
     switch(currentGroupOperation) {
       case "set-active":
         updateUsers({ status: "true" });
@@ -159,6 +164,12 @@ function setUsersControls(users) {
         break;
       case "delete":
         removeUsers();
+        break;
+      default:
+        showError(
+          "Please select some group operation!",
+          "You can foud operations near the 'OK' button"
+        );
         break;
     }
   });
@@ -186,6 +197,16 @@ function fillFormByUserData(userId) {
   } else {
     $(`input.inactive-status`).prop("checked", true);
     $(`input.active-status`).prop("checked", false);
+  }
+}
+
+function showError(msg, descr) {
+  $('#errorModal').find('.modal-body').remove();
+  $('#errorModal').modal('show');
+  $('#errorModal').find('.modal-title').text(msg);
+
+  if (descr) {
+    $(`<div class="modal-body">${descr}</div>`).insertAfter($('#errorModal').find('.modal-header'));
   }
 }
 
