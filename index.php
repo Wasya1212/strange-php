@@ -15,7 +15,7 @@
 <div class="container">
 <div class="panel-body">
   <div class="form-group row">
-    <label class="col-sm-2 control-label">Group operations</label>
+    <label class="col-sm-2 control-label col-form-label">Group operations</label>
     <div class="col-sm-3">
       <select name="operations" class="form-control">
         <option selected="true">please select</option>
@@ -58,7 +58,7 @@
 </div>
 <div class="panel-body">
   <div class="form-group row">
-    <label class="col-sm-2 control-label">Group operations</label>
+    <label class="col-sm-2 control-label col-form-label">Group operations</label>
     <div class="col-sm-3">
       <select name="operations" class="form-control">
         <option selected="true">please select</option>
@@ -118,26 +118,26 @@
       <div class="modal-body">
         <form id="user-data-form">
           <div class="form-group">
-            <label class="col-form-label">Select role</label>
-            <select name="role" class="form-control">
+            <label for="user-role-select" class="col-form-label">Select role</label>
+            <select id="user-role-select" name="role" class="form-control">
               <option value="user" selected="true">user</option>
               <option value="admin">admin</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label class="col-form-label">First name</label>
-            <input required type="text" name="firstname" class="form-control">
+            <label for="user-firstname-input" class="col-form-label">First name</label>
+            <input id="user-firstname-input" required type="text" name="firstname" class="form-control">
           </div>
 
           <div class="form-group">
-            <label class="col-form-label">Last name</label>
-            <input required type="text" name="lastname" class="form-control">
+            <label for="user-lastname-input" class="col-form-label">Last name</label>
+            <input id="user-lastname-input" required type="text" name="lastname" class="form-control">
           </div>
 
           <div class="form-group google-checker-container">
-            <label class="col-form-label">Status</label>
-            <input type="checkbox" name="status" value="true" class="form-control" controller="google-checker">
+            <label for="user-status-checkbox" class="col-form-label">Status</label>
+            <input id="user-status-checkbox" type="checkbox" name="status" value="true" class="form-control" controller="google-checker">
             <div class="google-checker"></div>
           </div>
 
