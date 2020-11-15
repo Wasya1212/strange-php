@@ -26,7 +26,8 @@ try {
 } catch (Exception $e) { }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-  $results = $mysqli->query('SELECT * FROM users LIMIT 5');
+  $results = $mysqli->query('SELECT * FROM users');
+  // $results = $mysqli->query('SELECT * FROM users LIMIT 5');
   $rowsCount = $mysqli->query('SELECT COUNT(*) AS total_count FROM users');
 
   echo json_encode(array(

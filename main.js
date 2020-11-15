@@ -4,18 +4,6 @@ let currentGroupOperation = "";
 const usersList = [];
 let usersTable;
 
-function setPagination(pagesCount, currentPage = 1) {
-  if (isNaN(pagesCount)) return;
-
-  $('.pagination').html(`
-    ${currentPage !== 1 ? '<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>' : ''}
-    ${(new Array(pagesCount)).fill(null).map((_, index) => (
-      `<li><a href="#">${index + 1}</a></li>`
-    )).join('\n')}
-    ${currentPage !== pagesCount ? '<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>' : ''}
-  `);
-}
-
 function createCheckboxesController() {
   $('.user-checker').on('change', e => {
     const checkersCount = $('.user-checker').size();
@@ -199,8 +187,8 @@ function useGroupOperation() {
       User
         .removeUserById(checkedUserIds)
         .then(() => {
+          usersTable.remove(checkedUserIds);
           clearSelectedIds();
-          document.location.reload();
         });
       break;
     default:
@@ -253,9 +241,6 @@ $(document).ready(() => {
       });
 
       usersTable = new UserTableBuilder('.main-box', usersList);
-
-      const pagesCount = Math.ceil(usersCount / users.length);
-      setPagination(pagesCount, 1);
       setUsersControls(users || []);
     });
 });
