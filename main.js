@@ -4,11 +4,9 @@ let currentGroupOperation = "";
 
 function getUserElement({ firstname, lastname, role, status, id }) {
   return `
-  <tr id="user-${id}-info">
-    <td>
-    <div class="input-group-text">
+  <tr id="user-${id}-info" scope="row">
+    <td scope="row">
       <input userid="${id}" class="user-checker" type="checkbox" aria-label="Checkbox for following text input">
-    </div>
     </td>
     <td>
       <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
@@ -82,6 +80,11 @@ function createCheckboxesController() {
         $(this).prop("checked", true);
       });
       fillIds();
+    } else {
+      clearSelectedIds();
+      $('.user-checker').each(function(index) {
+        $(this).prop("checked", false);
+      });
     }
   });
 }
@@ -199,7 +202,7 @@ $(document).ready(() => {
 function getUsers() {
   return new Promise((resolve, reject) => {
     $.ajax({
-      url: '/ajax.php',
+      url: 'ajax.php',
       method: "GET",
       success: (result) => {
         resolve(result);
@@ -213,7 +216,7 @@ function getUsers() {
 
 function removeUsers(usersIds) {
   $.ajax({
-    url: '/ajax.php',
+    url: 'ajax.php',
     method: 'DELETE',
     dataType: 'json',
     data: JSON.stringify({ id: checkedUserIds }),
@@ -231,7 +234,7 @@ function removeUsers(usersIds) {
 
 function createUser() {
   $.ajax({
-    url: '/ajax.php',
+    url: 'ajax.php',
     method: "POST",
     dataType: 'json',
     data: $('form').serialize(),
@@ -249,7 +252,7 @@ function createUser() {
 
 function updateUsers(data) {
   $.ajax({
-    url: '/ajax.php',
+    url: 'ajax.php',
     method: 'PUT',
     dataType: 'json',
     data: JSON.stringify(

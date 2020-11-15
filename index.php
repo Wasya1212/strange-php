@@ -4,7 +4,10 @@
     <meta charset="utf-8">
     <title>User list page - Bootdey.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="bootstrap.min.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -33,18 +36,16 @@
 	<div class="col-lg-12">
 		<div class="main-box clearfix">
 			<div class="table-responsive">
-				<table class="table user-list">
+				<table border="0" cellspacing="0" cellpadding="0" class="table user-list">
 					<thead>
-						<tr>
-              <th>
-                <div class="input-group-text">
-                  <input class="group-operations" type="checkbox" aria-label="Checkbox for following text input">
-                </div>
+						<tr scope="row">
+              <th scope="col">
+                <input class="group-operations" type="checkbox" aria-label="Checkbox for following text input">
               </th>
-							<th><span>User</span></th>
-							<th class="text-center"><span>Status</span></th>
-							<th><span>Role</span></th>
-							<th>&nbsp;</th>
+							<th scope="col"><span>User</span></th>
+							<th scope="col" class="text-center"><span>Status</span></th>
+							<th scope="col"><span>Role</span></th>
+							<th scope="col">&nbsp;</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -133,7 +134,14 @@
 </div>
 </div>
 <script src="jquery.min.js"></script>
-<script src="bootstrap.min.js"></script>
+<!-- <script src="bootstrap.min.js"></script> -->
+
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
 <script src="main.js" type="text/javascript"></script>
 </body>
 </html>
