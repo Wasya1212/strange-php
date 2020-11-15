@@ -1,3 +1,54 @@
+:root {
+  --googleCheckerBackgroundColor: #6bb0fb;
+  --googleCheckerUncheckedBackgroundColor: #a9a9a9;
+  --googleCheckerColor: white;
+  --googleCheckerWidth: 70px;
+  --googleCheckerHeight: 35px;
+}
+
+input[controller="google-checker"] {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  width: var(--googleCheckerWidth);
+  height: var(--googleCheckerHeight);
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.google-checker {
+  width: var(--googleCheckerWidth);
+  height: var(--googleCheckerHeight);
+  background-color: var(--googleCheckerUncheckedBackgroundColor);
+  border-radius: calc(var(--googleCheckerHeight) / 2);
+  position: relative;
+  box-shadow: 0 0 7px rgba(0, 0, 0, .3) inset;
+}
+
+.google-checker::after {
+  content: '';
+  position: absolute;
+  width: calc(var(--googleCheckerHeight) * 0.9);
+  height: calc(var(--googleCheckerHeight) * 0.9);
+  border-radius: 50%;
+  background-color: var(--googleCheckerColor);
+  top: calc(var(--googleCheckerHeight) * 0.05);
+  left: calc(var(--googleCheckerHeight) * 0.05);
+  transition: .25s all ease-in-out;
+}
+
+input[controller="google-checker"]:checked ~ .google-checker {
+  background-color: var(--googleCheckerBackgroundColor);
+}
+
+input[controller="google-checker"]:checked ~ .google-checker::after {
+  transform: translateX(calc(var(--googleCheckerWidth) - var(--googleCheckerHeight)));
+}
+
+.google-checker-container {
+  position: relative;
+}
+
 .panel {
   box-shadow: none;
 }

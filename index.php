@@ -26,7 +26,7 @@
     </div>
     <div class="col-sm-3">
       <button type="button" class="btn btn-primary multi-ops-btn">OK</button>
-      <button type="button" class="btn btn-primary add-user-btn" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" class="btn btn-primary add-user-btn" data-toggle="modal" data-target="#userDataModal">
         Add new User
       </button>
     </div>
@@ -69,68 +69,12 @@
     </div>
     <div class="col-sm-3">
       <button type="button" class="btn btn-primary multi-ops-btn">OK</button>
-      <button type="button" class="btn btn-primary add-user-btn" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" class="btn btn-primary add-user-btn" data-toggle="modal" data-target="#userDataModal">
         Add new User
       </button>
     </div>
   </div>
 </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-            <h4 class="panel-title">User info</h4>
-            </div>
-            <div class="panel-body">
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Select role</label>
-                <div class="col-sm-10">
-                  <select name="role" class="form-control">
-                    <option value="user" selected="true">user</option>
-                    <option value="admin">admin</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">First name</label>
-                <div class="col-sm-10">
-                  <input required type="text" name="firstname" class="form-control">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Last name</label>
-                <div class="col-sm-10">
-                  <input required type="text" name="lastname" class="form-control">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-4 control-label">Status (active/inactive)</label>
-                <div class="col-sm-8 status-radio-checkers">
-                  <input type="radio" checked name="status" value="true" class="form-control active-status">
-                  <input type="radio" name="status" value="" class="form-control inactive-status">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-10">
-                  <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    </div>
-  </div>
 
   <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -162,14 +106,55 @@
   </div>
 </div>
 
+<div class="modal fade" id="userDataModal" tabindex="-1" aria-labelledby="userDataModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userDataModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="user-data-form">
+          <div class="form-group">
+            <label class="col-form-label">Select role</label>
+            <select name="role" class="form-control">
+              <option value="user" selected="true">user</option>
+              <option value="admin">admin</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="col-form-label">First name</label>
+            <input required type="text" name="firstname" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label class="col-form-label">Last name</label>
+            <input required type="text" name="lastname" class="form-control">
+          </div>
+
+          <div class="form-group google-checker-container">
+            <label class="col-form-label">Status</label>
+            <input type="checkbox" name="status" value="true" class="form-control" controller="google-checker">
+            <div class="google-checker"></div>
+          </div>
+
+          <button class="invisible button" type="submit" name="button" hidden>submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="submit-user-data-btn" type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 </div>
 <script src="jquery.min.js"></script>
-<!-- <script src="bootstrap.min.js"></script> -->
-
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script> -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 

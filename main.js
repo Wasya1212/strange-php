@@ -124,6 +124,14 @@ function setUsersControls(users) {
     removeUsers();
   });
 
+  $('#submit-user-data-btn').click(() => {
+    $('#user-data-form').find('button[type="submit"]').click();
+  });
+
+  $('#userDataModal').on('hidden.bs.modal', function () {
+    $(this).find('form').trigger('reset');
+  });
+
   $('.update-btn').on('click', function(index) {
     const currentUserId = $(this).attr('userid');
 
@@ -131,12 +139,12 @@ function setUsersControls(users) {
     checkedUserIds.push(currentUserId);
 
     fillFormByUserData(currentUserId);
-    $("#exampleModal").modal("show");
+    $("#userDataModal").modal("show");
     selectUpdateOperation();
   });
 
   createCheckboxesController();
-  $('form').on('submit', function(e) {
+  $('#user-data-form').on('submit', function(e) {
     e.preventDefault();
     if (currentOperation === "CREATE") {
       createUser();
@@ -219,11 +227,9 @@ function fillFormByUserData(userId) {
     $(`select[name="role"] option[value="user"]`).prop('selected', true);
   }
   if (status === 'active') {
-    $(`input.active-status`).prop("checked", true);
-    $(`input.inactive-status`).prop("checked", false);
+    $(`input[name="status"]`).prop("checked", true);
   } else {
-    $(`input.inactive-status`).prop("checked", true);
-    $(`input.active-status`).prop("checked", false);
+    $(`input[name="status"]`).prop("checked", false);
   }
 }
 
@@ -288,7 +294,7 @@ function createUser() {
     data: $('form').serialize(),
     success: (result) => {
       console.log(result);
-      $("#exampleModal").modal("hide");
+      $("#userDataModal").modal("hide");
       document.location.reload();
     },
     error: (xhr, resp, text) => {
@@ -308,20 +314,20 @@ function updateUsers(data) {
         firstname: $('input[name="firstname"]').val(),
         lastname: $('input[name="lastname"]').val(),
         role: $('select[name="role"]').val(),
-        status: $('input[name="status"]:checked').val()
+        status: $('input[name="status"]').val()
       })
     ),
     success: (result) => {
       clearSelectedIds();
       selectCreateOperation();
-      $("#exampleModal").modal("hide");
+      $("#userDataModal").modal("hide");
       document.location.reload();
     },
     error: (xhr, resp, text) => {
       console.log(xhr, resp, text);
       clearSelectedIds();
       selectCreateOperation();
-      $("#exampleModal").modal("hide");
+      $("#userDataModal").modal("hide");
       document.location.reload();
     }
   });
