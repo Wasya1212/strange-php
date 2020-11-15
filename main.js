@@ -155,24 +155,51 @@ function setUsersControls(users) {
       return;
     }
 
-    switch(currentGroupOperation) {
-      case "set-active":
-        updateUsers({ status: "true" });
-        break;
-      case "set-no-active":
-        updateUsers({ status: "" });
-        break;
-      case "delete":
-        removeUsers();
-        break;
-      default:
-        showError(
-          "Please select some group operation!",
-          "You can foud operations near the 'OK' button"
-        );
-        break;
+    if (!['set-active', 'set-no-active', 'delete'].includes(currentGroupOperation)) {
+      showError(
+        "Please select some group operation!",
+        "You can foud operations near the 'OK' button"
+      );
+      return;
     }
+
+    showConfirmModal({
+      onConfirm: () => { useGroupOperation(); },
+      onCancel: () => { console.log('canceled'); }
+    });
   });
+}
+
+function showConfirmModal({ onConfirm, onCancel }) {
+  $('#confirmModal').find('.modal-footer').html(`
+    <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+  `);
+
+  $('#confirmModal').find('.btn-success').click(onConfirm);
+  $('#confirmModal').find('.btn-secondary').click(onCancel);
+
+  $('#confirmModal').modal('show');
+}
+
+function useGroupOperation() {
+  switch(currentGroupOperation) {
+    case "set-active":
+      updateUsers({ status: "true" });
+      break;
+    case "set-no-active":
+      updateUsers({ status: "" });
+      break;
+    case "delete":
+      removeUsers();
+      break;
+    default:
+      showError(
+        "Please select some group operation!",
+        "You can foud operations near the 'OK' button"
+      );
+      break;
+  }
 }
 
 function fillFormByUserData(userId) {
