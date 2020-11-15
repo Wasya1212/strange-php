@@ -121,7 +121,12 @@ function setUsersControls(users) {
     clearSelectedIds();
     checkedUserIds.push(currentUserId);
 
-    removeUsers();
+    User
+      .removeUserById(checkedUserIds)
+      .then(() => {
+        clearSelectedIds();
+        document.location.reload();
+      });
   });
 
   $('#submit-user-data-btn').click(() => {
@@ -199,7 +204,12 @@ function useGroupOperation() {
       updateUsers({ status: "" });
       break;
     case "delete":
-      removeUsers();
+      User
+        .removeUserById(checkedUserIds)
+        .then(() => {
+          clearSelectedIds();
+          document.location.reload();
+        });
       break;
     default:
       showError(
@@ -253,23 +263,23 @@ $(document).ready(() => {
     });
 });
 
-function removeUsers(usersIds) {
-  $.ajax({
-    url: 'ajax.php',
-    method: 'DELETE',
-    dataType: 'json',
-    data: JSON.stringify({ id: checkedUserIds }),
-    success: (result) => {
-      clearSelectedIds();
-      document.location.reload();
-    },
-    error: (xhr, resp, text) => {
-      console.log(xhr, resp, text);
-      clearSelectedIds();
-      document.location.reload();
-    }
-  });
-}
+// function removeUsers(usersIds) {
+//   $.ajax({
+//     url: 'ajax.php',
+//     method: 'DELETE',
+//     dataType: 'json',
+//     data: JSON.stringify({ id: checkedUserIds }),
+//     success: (result) => {
+//       clearSelectedIds();
+//       document.location.reload();
+//     },
+//     error: (xhr, resp, text) => {
+//       console.log(xhr, resp, text);
+//       clearSelectedIds();
+//       document.location.reload();
+//     }
+//   });
+// }
 
 function createUser() {
   $.ajax({
