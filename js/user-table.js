@@ -16,6 +16,18 @@ class UserTableBuilder {
       this.containerElement.find('tbody').append(getUserTableRow(user));
     });
   }
+
+  remove(ids) {
+    const newUsersList = this.usersList.filter(user => !ids.includes(user.id));
+    ids.forEach(userId => {
+      $(`#user-${userId}-info`).remove();
+    });
+  }
+
+  update(newUsersList) {
+    this.usersList = newUsersList;
+    this.init();
+  }
 }
 
 function getUsersTableView() {

@@ -35,7 +35,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="main-box clearfix">
-			
+
 			<ul class="pagination pull-right"></ul>
 		</div>
 	</div>
@@ -136,7 +136,6 @@
   </div>
 </div>
 
-</div>
 </div>
 <script src="jquery.min.js"></script>
 

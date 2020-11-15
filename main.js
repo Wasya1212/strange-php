@@ -1,44 +1,8 @@
 const checkedUserIds = [];
 let currentOperation = "CREATE";
 let currentGroupOperation = "";
-
-// function getUserElement({ firstname, lastname, role, status, id }) {
-//   return `
-//   <tr id="user-${id}-info" scope="row">
-//     <td scope="row">
-//       <input userid="${id}" class="user-checker" type="checkbox" aria-label="Checkbox for following text input">
-//     </td>
-//     <td>
-//       <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-//       <a href="#" class="user-link firstname-container">${firstname}</a>
-//       <a href="#" class="user-link lastname-container">${lastname}</a>
-//       <span class="user-subhead">${role}</span>
-//     </td>
-//     <td class="text-center">
-//       ${
-//         status == 0
-//           ? '<span class="label label-default inactive user-status-container">inactive</span>'
-//           : '<span class="label label-default active user-status-container">active</span>'
-//         }
-//     </td>
-//     <td class="user-role-container">${role}</td>
-//     <td style="width: 20%;">
-//       <a href="#" class="table-link update-btn" userid="${id}">
-//         <span class="fa-stack">
-//           <i class="fa fa-square fa-stack-2x"></i>
-//           <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-//         </span>
-//       </a>
-//       <a href="#" class="table-link danger delete-btn" userid="${id}">
-//         <span class="fa-stack">
-//           <i class="fa fa-square fa-stack-2x"></i>
-//           <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-//         </span>
-//       </a>
-//     </td>
-//   </tr>
-//   `;
-// }
+const usersList = [];
+let usersTable;
 
 function setPagination(pagesCount, currentPage = 1) {
   if (isNaN(pagesCount)) return;
@@ -51,13 +15,6 @@ function setPagination(pagesCount, currentPage = 1) {
     ${currentPage !== pagesCount ? '<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>' : ''}
   `);
 }
-
-// function setUsers(users) {
-//   const tableContainerElement = $('tbody');
-//   users.forEach(user => {
-//     tableContainerElement.append(getUserElement(user));
-//   });
-// }
 
 function createCheckboxesController() {
   $('.user-checker').on('change', e => {
@@ -124,8 +81,8 @@ function setUsersControls(users) {
     User
       .removeUserById(checkedUserIds)
       .then(() => {
+        usersTable.remove(checkedUserIds);
         clearSelectedIds();
-        document.location.reload();
       });
   });
 
@@ -288,16 +245,17 @@ function showError(msg, descr) {
   }
 }
 
-let usersTable;
-
 $(document).ready(() => {
   User.getUsers()
     .then(({ users, usersCount }) => {
-      usersTable = new UserTableBuilder('.main-box', users || []);
+      (users || []).forEach(userInfo => {
+        usersList.push(new User(userInfo));
+      });
+
+      usersTable = new UserTableBuilder('.main-box', usersList);
 
       const pagesCount = Math.ceil(usersCount / users.length);
       setPagination(pagesCount, 1);
-      // setUsers(users || []);
       setUsersControls(users || []);
     });
 });
