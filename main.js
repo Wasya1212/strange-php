@@ -166,7 +166,17 @@ function setUsersControls(users) {
         });
     }
     if (currentOperation === "UPDATE") {
-      updateUsers();
+      User.updateUserById(checkedUserIds, {
+        firstname: $('input[name="firstname"]').val(),
+        lastname: $('input[name="lastname"]').val(),
+        role: $('select[name="role"]').val(),
+        status: $('input[name="status"]').prop('checked')
+      }).then(() => {
+        clearSelectedIds();
+        selectCreateOperation();
+        $("#userDataModal").modal("hide");
+        document.location.reload();
+      });
     }
   });
 
@@ -209,10 +219,24 @@ function showConfirmModal({ onConfirm, onCancel }) {
 function useGroupOperation() {
   switch(currentGroupOperation) {
     case "set-active":
-      updateUsers({ status: "true" });
+      User
+        .updateUserById(checkedUserIds, { status: "true" })
+        .then(() => {
+          clearSelectedIds();
+          selectCreateOperation();
+          $("#userDataModal").modal("hide");
+          document.location.reload();
+        });
       break;
     case "set-no-active":
-      updateUsers({ status: "" });
+      User
+        .updateUserById(checkedUserIds, { status: "" })
+        .then(() => {
+          clearSelectedIds();
+          selectCreateOperation();
+          $("#userDataModal").modal("hide");
+          document.location.reload();
+        });
       break;
     case "delete":
       User
@@ -273,68 +297,3 @@ $(document).ready(() => {
       setUsersControls(users || []);
     });
 });
-
-// function removeUsers(usersIds) {
-//   $.ajax({
-//     url: 'ajax.php',
-//     method: 'DELETE',
-//     dataType: 'json',
-//     data: JSON.stringify({ id: checkedUserIds }),
-//     success: (result) => {
-//       clearSelectedIds();
-//       document.location.reload();
-//     },
-//     error: (xhr, resp, text) => {
-//       console.log(xhr, resp, text);
-//       clearSelectedIds();
-//       document.location.reload();
-//     }
-//   });
-// }
-
-// function createUser() {
-//   $.ajax({
-//     url: 'ajax.php',
-//     method: "POST",
-//     dataType: 'json',
-//     data: $('form').serialize(),
-//     success: (result) => {
-//       console.log(result);
-//       $("#userDataModal").modal("hide");
-//       document.location.reload();
-//     },
-//     error: (xhr, resp, text) => {
-//       console.log(xhr, resp, text);
-//       document.location.reload();
-//     }
-//   });
-// }
-
-function updateUsers(data) {
-  $.ajax({
-    url: 'ajax.php',
-    method: 'PUT',
-    dataType: 'json',
-    data: JSON.stringify(
-      Object.assign({ id: checkedUserIds }, data || {
-        firstname: $('input[name="firstname"]').val(),
-        lastname: $('input[name="lastname"]').val(),
-        role: $('select[name="role"]').val(),
-        status: $('input[name="status"]').val()
-      })
-    ),
-    success: (result) => {
-      clearSelectedIds();
-      selectCreateOperation();
-      $("#userDataModal").modal("hide");
-      document.location.reload();
-    },
-    error: (xhr, resp, text) => {
-      console.log(xhr, resp, text);
-      clearSelectedIds();
-      selectCreateOperation();
-      $("#userDataModal").modal("hide");
-      document.location.reload();
-    }
-  });
-}

@@ -71,4 +71,24 @@ class User {
       });
     });
   }
+
+  static updateUserById(id, newUserData) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'ajax.php',
+        method: 'PUT',
+        dataType: 'json',
+        data: JSON.stringify(
+          Object.assign({ id: Array.isArray(id) ? id : [id] }, newUserData)
+        ),
+        success: (result) => {
+          resolve(result);
+        },
+        error: (xhr, resp, text) => {
+          console.error(xhr, resp, text);
+          reject(text);
+        }
+      });
+    });
+  }
 }
