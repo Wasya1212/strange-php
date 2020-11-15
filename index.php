@@ -13,26 +13,26 @@
 </head>
 <body>
 <div class="container">
-<div class="row">
-  <div class="panel-body">
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Select status</label>
-      <div class="col-sm-3">
-        <select name="operations" class="form-control">
-          <option selected="true">please select</option>
-          <option value="set-active">set active</option>
-          <option value="set-no-active">set no active</option>
-          <option value="delete">delete</option>
-        </select>
-      </div>
-      <div class="col-sm-3">
-        <button type="button" class="btn btn-primary multi-ops-btn">OK</button>
-        <button type="button" class="btn btn-primary add-user-btn" data-toggle="modal" data-target="#exampleModal">
-          Add new User
-        </button>
-      </div>
+<div class="panel-body">
+  <div class="form-group row">
+    <label class="col-sm-2 control-label">Group operations</label>
+    <div class="col-sm-3">
+      <select name="operations" class="form-control">
+        <option selected="true">please select</option>
+        <option value="set-active">set active</option>
+        <option value="set-no-active">set no active</option>
+        <option value="delete">delete</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary multi-ops-btn">OK</button>
+      <button type="button" class="btn btn-primary add-user-btn" data-toggle="modal" data-target="#exampleModal">
+        Add new User
+      </button>
     </div>
   </div>
+</div>
+<div class="row">
 	<div class="col-lg-12">
 		<div class="main-box clearfix">
 			<div class="table-responsive">
@@ -57,8 +57,8 @@
 	</div>
 </div>
 <div class="panel-body">
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Select status</label>
+  <div class="form-group row">
+    <label class="col-sm-2 control-label">Group operations</label>
     <div class="col-sm-3">
       <select name="operations" class="form-control">
         <option selected="true">please select</option>
