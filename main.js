@@ -152,7 +152,18 @@ function setUsersControls(users) {
   $('#user-data-form').on('submit', function(e) {
     e.preventDefault();
     if (currentOperation === "CREATE") {
-      createUser();
+      const newUser = new User({
+        firstname: $(this).find('input[name="firstname"]').val(),
+        lastname: $(this).find('input[name="lastname"]').val(),
+        status: $(this).find('input[name="status"]').val(),
+        role: $(this).find('select[name="role"]').val()
+      });
+      newUser
+        .save()
+        .then(() => {
+          $("#userDataModal").modal("hide");
+          document.location.reload();
+        });
     }
     if (currentOperation === "UPDATE") {
       updateUsers();
@@ -281,23 +292,23 @@ $(document).ready(() => {
 //   });
 // }
 
-function createUser() {
-  $.ajax({
-    url: 'ajax.php',
-    method: "POST",
-    dataType: 'json',
-    data: $('form').serialize(),
-    success: (result) => {
-      console.log(result);
-      $("#userDataModal").modal("hide");
-      document.location.reload();
-    },
-    error: (xhr, resp, text) => {
-      console.log(xhr, resp, text);
-      document.location.reload();
-    }
-  });
-}
+// function createUser() {
+//   $.ajax({
+//     url: 'ajax.php',
+//     method: "POST",
+//     dataType: 'json',
+//     data: $('form').serialize(),
+//     success: (result) => {
+//       console.log(result);
+//       $("#userDataModal").modal("hide");
+//       document.location.reload();
+//     },
+//     error: (xhr, resp, text) => {
+//       console.log(xhr, resp, text);
+//       document.location.reload();
+//     }
+//   });
+// }
 
 function updateUsers(data) {
   $.ajax({

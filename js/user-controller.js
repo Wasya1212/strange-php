@@ -14,7 +14,26 @@ class User {
   }
 
   save() {
-
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'ajax.php',
+        method: "POST",
+        dataType: 'json',
+        data: {
+          firstname: this.firstname,
+          lastname: this.lastname,
+          role: this.role,
+          status: this.status
+        },
+        success: (result) => {
+          resolve(result);
+        },
+        error: (xhr, resp, text) => {
+          console.error(xhr, resp, text);
+          reject(text);
+        }
+      });
+    });
   }
 
   static removeUserById(id) {
