@@ -35,23 +35,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="main-box clearfix">
-			<div class="table-responsive">
-				<table border="0" cellspacing="0" cellpadding="0" class="table user-list">
-					<thead>
-						<tr scope="row">
-              <th scope="col">
-                <input class="group-operations" type="checkbox" aria-label="Checkbox for following text input">
-              </th>
-							<th scope="col"><span>User</span></th>
-							<th scope="col" class="text-center"><span>Status</span></th>
-							<th scope="col"><span>Role</span></th>
-							<th scope="col">&nbsp;</th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
-			</div>
+			
 			<ul class="pagination pull-right"></ul>
 		</div>
 	</div>
@@ -158,6 +142,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 <script src="js/user-controller.js"></script>
+<script src="js/user-table.js"></script>
 <script src="main.js" type="text/javascript"></script>
 </body>
 </html>
