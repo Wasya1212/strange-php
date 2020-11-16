@@ -136,6 +136,7 @@ function setUsersControls(users) {
         .save()
         .then((createdUser) => {
           const user = new User(createdUser)
+          usersList.push(user);
           usersTable.add(user);
           createControlById(user.id);
           $("#userDataModal").modal("hide");
@@ -236,6 +237,7 @@ function useGroupOperation() {
         .then(() => {
           usersTable.remove(checkedUserIds);
           clearSelectedIds();
+          uncheckAllUsers();
         });
       break;
     default:
@@ -248,6 +250,7 @@ function useGroupOperation() {
 }
 
 function uncheckAllUsers() {
+  $('.group-operations').prop("checked", false);
   $('.user-checker').each(function(index) {
     $(this).prop("checked", false);
   });
