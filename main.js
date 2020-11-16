@@ -331,5 +331,9 @@ $(document).ready(() => {
 
       usersTable = new UserTableBuilder('.main-box', usersList);
       setUsersControls(users || []);
+    })
+    .catch(err => {
+      usersTable = new UserTableBuilder('.main-box', []);
+      setUsersControls([]);
     });
 });
