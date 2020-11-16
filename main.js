@@ -193,6 +193,7 @@ function setUsersControls(users) {
 
   $('select[name="operations"]').on('change', function(e) {
     currentGroupOperation =  $(this).val();
+    $(`select[name="operations"] option[value=${currentGroupOperation}]`).prop('selected', true);
   });
   $('.multi-ops-btn').click(e => {
     if (checkedUserIds.length === 0) {
