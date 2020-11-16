@@ -96,13 +96,15 @@ function setUsersControls(users) {
   createCheckboxesController();
   $('#user-data-form').on('submit', function(e) {
     e.preventDefault();
+
+    const newUser = new User({
+      firstname: $(this).find('input[name="firstname"]').val(),
+      lastname: $(this).find('input[name="lastname"]').val(),
+      status: $(this).find('input[name="status"]').prop('checked'),
+      role: $(this).find('select[name="role"]').val()
+    });
+
     if (currentOperation === "CREATE") {
-      const newUser = new User({
-        firstname: $(this).find('input[name="firstname"]').val(),
-        lastname: $(this).find('input[name="lastname"]').val(),
-        status: $(this).find('input[name="status"]').val(),
-        role: $(this).find('select[name="role"]').val()
-      });
       newUser
         .save()
         .then(() => {
@@ -111,17 +113,19 @@ function setUsersControls(users) {
         });
     }
     if (currentOperation === "UPDATE") {
-      User.updateUserById(checkedUserIds, {
-        firstname: $('input[name="firstname"]').val(),
-        lastname: $('input[name="lastname"]').val(),
-        role: $('select[name="role"]').val(),
-        status: $('input[name="status"]').prop('checked')
-      }).then(() => {
-        clearSelectedIds();
-        selectCreateOperation();
-        $("#userDataModal").modal("hide");
-        document.location.reload();
-      });
+      User
+        .updateUserById(checkedUserIds, {
+          firstname: newUser.firstname,
+          lastname: newUser.lastname,
+          status: newUser.status,
+          role: newUser.role
+        })
+        .then(() => {
+          usersTable.replace(checkedUserIds[0], newUser);
+          clearSelectedIds();
+          selectCreateOperation();
+          $("#userDataModal").modal("hide");
+        });
     }
   });
 
@@ -161,26 +165,40 @@ function showConfirmModal({ onConfirm, onCancel }) {
   $('#confirmModal').modal('show');
 }
 
+function updateStatus(userIds, status) {
+  userIds.forEach(id => {
+    $(`#user-${id}-info`).find('.user-active-status').html(`
+      ${
+        status == 0 || !status
+          ? '<span class="label label-default inactive user-status-container">inactive</span>'
+          : '<span class="label label-default active user-status-container">active</span>'
+      }
+    `);
+  });
+}
+
 function useGroupOperation() {
   switch(currentGroupOperation) {
     case "set-active":
       User
         .updateUserById(checkedUserIds, { status: "true" })
         .then(() => {
+          updateStatus(checkedUserIds, true);
           clearSelectedIds();
           selectCreateOperation();
           $("#userDataModal").modal("hide");
-          document.location.reload();
+          uncheckAllUsers();
         });
       break;
     case "set-no-active":
       User
         .updateUserById(checkedUserIds, { status: "" })
         .then(() => {
+          updateStatus(checkedUserIds, false);
           clearSelectedIds();
           selectCreateOperation();
           $("#userDataModal").modal("hide");
-          document.location.reload();
+          uncheckAllUsers();
         });
       break;
     case "delete":
@@ -198,6 +216,12 @@ function useGroupOperation() {
       );
       break;
   }
+}
+
+function uncheckAllUsers() {
+  $('.user-checker').each(function(index) {
+    $(this).prop("checked", false);
+  });
 }
 
 function fillFormByUserData(userId) {

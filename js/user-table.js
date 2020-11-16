@@ -24,6 +24,19 @@ class UserTableBuilder {
     });
   }
 
+  replace(id, newUserInfo) {
+    $(`#user-${id}-info`).find('.firstname-container').text(newUserInfo.firstname);
+    $(`#user-${id}-info`).find('.lastname-container').text(newUserInfo.lastname);
+    $(`#user-${id}-info`).find('.role-container').text(newUserInfo.role);
+    $(`#user-${id}-info`).find('.user-active-status').html(`
+      ${
+        newUserInfo.status == 0 || !newUserInfo.status
+          ? '<span class="label label-default inactive user-status-container">inactive</span>'
+          : '<span class="label label-default active user-status-container">active</span>'
+      }
+    `);
+  }
+
   update(newUsersList) {
     this.usersList = newUsersList;
     this.init();
@@ -62,14 +75,14 @@ function getUserTableRow(user) {
         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
         <a href="#" class="user-link firstname-container">${user.firstname}</a>
         <a href="#" class="user-link lastname-container">${user.lastname}</a>
-        <span class="user-subhead">${user.role}</span>
+        <span class="user-subhead role-container">${user.role}</span>
       </td>
-      <td class="text-center">
+      <td class="text-center user-active-status">
         ${
           user.status == 0
             ? '<span class="label label-default inactive user-status-container">inactive</span>'
             : '<span class="label label-default active user-status-container">active</span>'
-          }
+        }
       </td>
       <td class="user-role-container">${user.role}</td>
       <td style="width: 20%;">
