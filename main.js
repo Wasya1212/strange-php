@@ -34,6 +34,36 @@ function createCheckboxesController() {
   });
 }
 
+function createCheckboxesControllerById(id) {
+  $(`#user-${id}-info`).find('.user-checker').on('change', e => {
+    const checkersCount = $('.user-checker').size();
+    const checkedCheckersCount = $('.user-checker:checked').size();
+
+    if (checkersCount === checkedCheckersCount) {
+      $('.group-operations').prop("checked", true);
+    } else {
+      $('.group-operations').prop("checked", false);
+    }
+
+    $('.user-checker:checked').each(function(index) {
+      checkedUserIds.push($(this).attr("userid"));
+    });
+  });
+  $('.group-operations').on('change', function(e) {
+    if ($(this).prop("checked") === true) {
+      $('.user-checker').each(function(index) {
+        $(this).prop("checked", true);
+      });
+      fillIds();
+    } else {
+      clearSelectedIds();
+      $('.user-checker').each(function(index) {
+        $(this).prop("checked", false);
+      });
+    }
+  });
+}
+
 function clearSelectedIds() {
   checkedUserIds.splice(0, checkedUserIds.length);
 }
@@ -47,12 +77,12 @@ function fillIds() {
 
 function selectCreateOperation() {
   currentOperation = "CREATE";
-  $('.modal-title').text('Create user');
+  $('#userDataModal').find('.modal-title').text('Create user');
 }
 
 function selectUpdateOperation() {
   currentOperation = "UPDATE";
-  $('.modal-title').text('Update user');
+  $('#userDataModal').find('.modal-title').text('Update user');
 }
 
 function createControlById(userId) {
@@ -107,6 +137,7 @@ function setUsersControls(users) {
 
   $('#userDataModal').on('hidden.bs.modal', function () {
     $(this).find('form').trigger('reset');
+    clearSelectedIds();
   });
 
   $('.update-btn').on('click', function(index) {
@@ -139,6 +170,7 @@ function setUsersControls(users) {
           usersList.push(user);
           usersTable.add(user);
           createControlById(user.id);
+          createCheckboxesControllerById(user.id);
           $("#userDataModal").modal("hide");
         });
     }
