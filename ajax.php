@@ -47,9 +47,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $stmt->bind_param('sssi', $firstname, $lastname, $role, $status);
 
   $stmt->execute();
+  $stmt->store_result();
+
+  $result_id = $stmt->insert_id;
+
   $stmt->close();
 
-  echo json_encode([]);
+  echo json_encode(array(
+    "firstname" => $firstname,
+    "lastname" => $lastname,
+    "role" => $role,
+    "status" => $status,
+    "id" => $result_id
+  ));
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'PUT') {

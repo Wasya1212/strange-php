@@ -55,6 +55,33 @@ function selectUpdateOperation() {
   $('.modal-title').text('Update user');
 }
 
+function createControlById(userId) {
+  $(`#user-${userId}-info`).find('.delete-btn').on('click', function(e) {
+    const currentUserId = userId;
+
+    clearSelectedIds();
+    checkedUserIds.push(currentUserId);
+
+    User
+      .removeUserById(checkedUserIds)
+      .then(() => {
+        usersTable.remove(checkedUserIds);
+        clearSelectedIds();
+      });
+  });
+
+  $(`#user-${userId}-info`).find('.update-btn').on('click', function(index) {
+    const currentUserId = userId;
+
+    clearSelectedIds();
+    checkedUserIds.push(currentUserId);
+
+    fillFormByUserData(currentUserId);
+    $("#userDataModal").modal("show");
+    selectUpdateOperation();
+  });
+}
+
 function setUsersControls(users) {
   $('.add-user-btn').on('click', function(e) {
     selectCreateOperation();
@@ -107,9 +134,11 @@ function setUsersControls(users) {
     if (currentOperation === "CREATE") {
       newUser
         .save()
-        .then(() => {
+        .then((createdUser) => {
+          const user = new User(createdUser)
+          usersTable.add(user);
+          createControlById(user.id);
           $("#userDataModal").modal("hide");
-          document.location.reload();
         });
     }
     if (currentOperation === "UPDATE") {

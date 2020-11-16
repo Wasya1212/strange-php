@@ -17,6 +17,10 @@ class UserTableBuilder {
     });
   }
 
+  add(newUser) {
+    this.containerElement.find('tbody').append(getUserTableRow(newUser));
+  }
+
   remove(ids) {
     const newUsersList = this.usersList.filter(user => !ids.includes(user.id));
     ids.forEach(userId => {
@@ -28,6 +32,7 @@ class UserTableBuilder {
     $(`#user-${id}-info`).find('.firstname-container').text(newUserInfo.firstname);
     $(`#user-${id}-info`).find('.lastname-container').text(newUserInfo.lastname);
     $(`#user-${id}-info`).find('.role-container').text(newUserInfo.role);
+    $(`#user-${id}-info`).find('.user-role-container').text(newUserInfo.role);
     $(`#user-${id}-info`).find('.user-active-status').html(`
       ${
         newUserInfo.status == 0 || !newUserInfo.status
