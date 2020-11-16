@@ -158,7 +158,7 @@ function setUsersControls(users) {
     const newUser = new User({
       firstname: $(this).find('input[name="firstname"]').val(),
       lastname: $(this).find('input[name="lastname"]').val(),
-      status: $(this).find('input[name="status"]').prop('checked'),
+      status: $(this).find('input[name="status"]').prop('checked') ? true : "",
       role: $(this).find('select[name="role"]').val()
     });
 

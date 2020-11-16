@@ -6,8 +6,8 @@ define('USER_STATUSES', array(0, 1));
 header('Content-Type: application/json');
 
 // $mysqli = new mysqli('localhost', 'vasil', 'password', 'test');
-// $mysqli = new mysqli('localhost', 'vasya', '', 'test');
-$mysqli = new mysqli('mysql.zzz.com.ua', 'wasya1212', 'Wasya1212', 'wasya1212');
+$mysqli = new mysqli('localhost', 'vasya', '', 'test');
+// $mysqli = new mysqli('mysql.zzz.com.ua', 'wasya1212', 'Wasya1212', 'wasya1212');
 // $mysqli = new mysqli('sql2.freemysqlhosting.net', 'sql2374864', 'nA9%mT7*', 'sql2374864', 3306);
 // $mysqli = new mysqli('remotemysql.com', 'IgWFoOAJN0', 'fMr42JWIrl', 'IgWFoOAJN0', 3306);
 
@@ -16,8 +16,8 @@ if (mysqli_connect_errno()) {
   exit();
 }
 
-$mysqli->query("CREATE TABLE IF NOT EXISTS wasya1212.users (id int not null primary key AUTO_INCREMENT, firstname VARCHAR(255) NOT NULL , lastname VARCHAR(255) NOT NULL , role VARCHAR(255) NOT NULL , status INT NOT NULL )");
-// $mysqli->query("CREATE TABLE IF NOT EXISTS test.users (id int not null primary key AUTO_INCREMENT, firstname VARCHAR(255) NOT NULL , lastname VARCHAR(255) NOT NULL , role VARCHAR(255) NOT NULL , status INT NOT NULL ) ENGINE = InnoDB;");
+// $mysqli->query("CREATE TABLE IF NOT EXISTS wasya1212.users (id int not null primary key AUTO_INCREMENT, firstname VARCHAR(255) NOT NULL , lastname VARCHAR(255) NOT NULL , role VARCHAR(255) NOT NULL , status INT NOT NULL )");
+$mysqli->query("CREATE TABLE IF NOT EXISTS test.users (id int not null primary key AUTO_INCREMENT, firstname VARCHAR(255) NOT NULL , lastname VARCHAR(255) NOT NULL , role VARCHAR(255) NOT NULL , status INT NOT NULL ) ENGINE = InnoDB;");
 
 $_PUT;
 $_DELETE;
